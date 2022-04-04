@@ -5,9 +5,9 @@ import space.muqingcloud.linkedlist.entity.LinkList;
 public interface LinkListMethod {
     boolean init(LinkList linkList);
 
-    boolean add(LinkList linkList, Integer value);
+    boolean insert(LinkList linkList, Integer value);
 
-    boolean traverse(LinkList linkList);
+    boolean foreach(LinkList linkList);
 
     boolean deleteValue(LinkList linkList, Integer value);
 
