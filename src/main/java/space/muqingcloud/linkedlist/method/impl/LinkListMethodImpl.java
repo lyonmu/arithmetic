@@ -15,7 +15,7 @@ public class LinkListMethodImpl implements LinkListMethod {
     }
 
     @Override
-    public boolean insert(LinkList linkList, Integer value){
+    public boolean insert(LinkList linkList, int value) {
         LinkListNode node = new LinkListNode(value);
         LinkListNode tagNode = new LinkListNode();
         if (0 == linkList.getLength()) {
@@ -66,31 +66,59 @@ public class LinkListMethodImpl implements LinkListMethod {
             System.out.print(tagNode.getValue() + "\t");
             tagNode = tagNode.getNext();
         }
+        System.out.println();
         return true;
     }
 
     @Override
-    public boolean deleteValue(LinkList linkList, Integer value) {
-        return true;
+    public LinkListNode updateWithNumber(LinkList linkList, int number, int value) {
+        if (linkList.getLength() < number) {
+            StaticLog.info("超出链表长度，应该采用插入！");
+            return null;
+        }
+        LinkListNode tagNode = linkList.getLinkHead();
+        for (int i = 0; i < number; i++) {
+            tagNode = tagNode.getNext();
+        }
+        tagNode.setValue(value);
+        return tagNode;
     }
 
     @Override
-    public boolean deleteNumber(LinkList linkList, Integer number) {
-        return true;
+    public LinkListNode selectNodeWithValue(LinkList linkList, int value) {
+        LinkListNode node = new LinkListNode();
+        LinkListNode tagNode = linkList.getLinkHead();
+        while (tagNode != null) {
+            if (value == tagNode.getValue()) {
+                node = tagNode;
+                break;
+            }
+            tagNode = tagNode.getNext();
+        }
+        return node;
     }
 
     @Override
-    public boolean updateValue(LinkList linkList, Integer number, Integer value) {
-        return true;
+    public LinkListNode getNumber(LinkList linkList, int number) {
+        LinkListNode tagNode = linkList.getLinkHead();
+        for (int i = 0; i < number; i++) {
+            tagNode = tagNode.getNext();
+        }
+        return tagNode;
     }
 
     @Override
-    public boolean selectNodeWithValue(LinkList linkList, Integer value) {
-        return true;
+    public LinkListNode deleteWithNumber(LinkList linkList, int number) {
+        linkList.setLength(linkList.getLength() - 1);
+        LinkListNode node = new LinkListNode();
+        LinkListNode tagNode = linkList.getLinkHead();
+        for (int i = 0; i < number; i++) {
+            tagNode = tagNode.getNext();
+        }
+        tagNode.getNext().setPrevious(tagNode.getPrevious());
+        tagNode.getPrevious().setNext(tagNode.getNext());
+        return node;
     }
 
-    @Override
-    public boolean selectNodeWithNumber(LinkList linkList, Integer number) {
-        return true;
-    }
+    ;
 }
